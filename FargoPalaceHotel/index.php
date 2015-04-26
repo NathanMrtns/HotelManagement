@@ -1,37 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Fargo Palace Hotel</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="">
 
-	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
-	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
-	<!--script src="js/less-1.3.3.min.js"></script-->
-	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
-	
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
-
-  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-  <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-  <![endif]-->
-
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/scripts.js"></script>
-</head>
-<body>
 <?php # HOME PAGE.
 
 # display header section.
 include ( 'header.html' ) ;
 
-?>
-<div class="carousel slide" id="carousel-275680">
+echo '<div class="carousel slide" id="carousel-275680">
     <ol class="carousel-indicators">
 	<li class="active" data-slide-to="0" data-target="#carousel-275680">
 	</li>
@@ -48,7 +21,7 @@ include ( 'header.html' ) ;
 		    Fargo Palace Hotel
 		</h4>
 		<p>
-                    Situated in downtown Fargo overlooking the city's business, government and cultural districts, the 18-story Radisson Fargo is the second-tallest building in North Dakota and dominates the flatlands of the Red River Valley.
+                    Situated in downtown Fargo overlooking the city business, government and cultural districts, the 18-story Radisson Fargo is the second-tallest building in North Dakota and dominates the flatlands of the Red River Valley.
 		</p>
 	</div>
     </div>
@@ -81,7 +54,7 @@ include ( 'header.html' ) ;
 	    Welcome to the Fargo Palace Hotel!
 	</h1>
 	<p>
-            Our hotel's Euro-style hotel rooms and on-site amenities, including a well-equipped fitness center, free Wi-Fi, complimentary airport shuttle service, a business center and three excellent dining outlets, ensure you a memorable stay.
+            Our hotel Euro-style hotel rooms and on-site amenities, including a well-equipped fitness center, free Wi-Fi, complimentary airport shuttle service, a business center and three excellent dining outlets, ensure you a memorable stay.
 	</p>
 	<p>
 	    <a class="btn btn-primary btn-large" href="#">More about us</a>
@@ -89,4 +62,4 @@ include ( 'header.html' ) ;
     </div>
 </div>
 </div>
-</div>
+</div>';
