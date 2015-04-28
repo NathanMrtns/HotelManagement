@@ -69,7 +69,7 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
   # On success register user inserting into 'users' database table.
   if ( empty( $errors ) )
   {
-    $q = "INSERT INTO user_table (first_name, last_name, phone, email, adress, zip_code, password) VALUES ('$fn', '$ln', '$ph', '$e', '$a', '$zip', SHA1('$p'))";
+    $q = "INSERT INTO user_table (first_name, last_name, phone, email, adress, zip_code, user_password) VALUES ('$fn', '$ln', '$ph', '$e', '$a', '$zip', SHA1('$p'))";
     $r = @mysqli_query ( $dbc, $q ) ;
     if ($r)
     { echo '<h1>Registered!</h1><p>You are now registered.</p><p><a href="login.php">Login</a></p>'; }
@@ -78,7 +78,7 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
     mysqli_close($dbc);
 
     # Display footer section and quit script:
-    include ('footer.html');
+    # include ('footer.html');
     exit();
   }
   # Or report errors.

@@ -53,6 +53,7 @@ include('header.html');
 			</div>
 		</div>
 	</form>
+
 <?php
 	if (isset($_POST['startDate']) && isset($_POST['endDate']) && isset($_POST['capacity'])) {
     $_SESSION['startDate'] = $_POST['startDate'];
@@ -80,7 +81,7 @@ include('header.html');
 				while($row = mysqli_fetch_array($result))
 			          {
 			          echo "<tr><td>" . $row['room_number'] . "</td><td> " . $row['capacity'] . "</td><td> " . $row['description'] . "</td><td> " . $row['room_type'] . "</td><td> $" . $row['price'] . "</td><td> "
-                      . "<a href='added.php?id=" . $row['room_number']."'>Add to your reserves</a>" . "</td></tr>"; //these are the fields that you have stored in your database table employee
+                      . "<a href='store_reserve.php?id=" . $row['room_number']."'>Make your reserve</a>" . "</td></tr>"; //these are the fields that you have stored in your database table employee
 			          }
 				/*for($c=0; $row = mysqli_fetch_row($result); $c++)
 				{
@@ -96,6 +97,7 @@ include('header.html');
 			print"</table>";
 		print "</div>";
 	print "</div>";
+
 	mysqli_close($dbc);
     exit;
 }else{

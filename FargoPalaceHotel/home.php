@@ -1,48 +1,24 @@
 <?php
+session_start();
 include('header.html');
-?>
 
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<div class="tabbable" id="tabs-209386">
-				<ul class="nav nav-tabs">
-					<li>
-						<a href="#panel-01" data-toggle="tab">Home</a>
-					</li>
-					<li class="active">
-						<a href="#panel-02" data-toggle="tab">Reserves</a>
-					</li>
-					<li class="active">
-						<a href="#panel-03" data-toggle="tab">Check out</a>
-					</li>
-					<li class="active">
-						<a href="#panel-04" data-toggle="tab">Log out</a>
-					</li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane" id="panel-01">
-						<p>
-							I'm in Home section.
-						</p>
-					</div>
-					<div class="tab-pane active" id="panel-02">
-						<p>
-							Howdy, I'm in Reserves section now.
-						</p>
-					</div>
-					<div class="tab-pane active" id="panel-03">
-						<p>
-							Howdy, I'm in Check ou section now.
-						</p>
-					</div>
-					<div class="tab-pane active" id="panel-04">
-						<p>
-							Howdy, I'm in Log out section now.
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+# Redirect if not logged in.
+if ( !isset( $_SESSION[ 'userID' ] ) ) { require ( 'login_tools.php' ) ; load() ; }
+
+echo "<p>You are logged in, {$_SESSION['first_name']}
+    {$_SESSION['last_name']} </p>";
+
+echo '<nav class="navbar navbar-default">
+      <div class="container-fluid">
+          <div>
+          <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="store_reserve.php">Reserves</a></li>
+              <li><a href="#">Check out</a></li>
+              <li><a href="log_out.php">Log out</a></li>
+          </ul>
+          </div>
+      </div>
+      </nav>' ;
+      
+?>
