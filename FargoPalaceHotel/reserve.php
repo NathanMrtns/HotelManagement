@@ -13,6 +13,12 @@ include('header.html');
 
 <body>
 	<form class="form-inline" method="post">
+        <div class="alert alert-info">
+                    <h4>
+                        FIND A ROOM
+                    </h4> <strong>RESERVES:</strong> Fill out the capacity, start date, end date and room type. This way we will provide avaiable rooms for you.
+        </div>
+        <br />
 		<div class="input-group input-group-sm">
 		    <div class="col-xs-3">
 	    		<span>Start Date: <input class="form-control" type="text" name="startDate" id="startDate" required><span>
@@ -73,7 +79,8 @@ include('header.html');
 				print "<tr><td>Room Number</td><td>Capacity</td><td>Description</td><td>Type</td><td>Price</td>";
 				while($row = mysqli_fetch_array($result))
 			          {
-			          echo "<tr><td>" . $row['room_number'] . "</td><td> " . $row['capacity'] . "</td><td> " . $row['description'] . "</td><td> " . $row['room_type'] . "</td><td> $" . $row['price'] . "</td></tr>"; //these are the fields that you have stored in your database table employee
+			          echo "<tr><td>" . $row['room_number'] . "</td><td> " . $row['capacity'] . "</td><td> " . $row['description'] . "</td><td> " . $row['room_type'] . "</td><td> $" . $row['price'] . "</td><td> "
+                      . "<a href='added.php?id=" . $row['room_number']."'>Add to your reserves</a>" . "</td></tr>"; //these are the fields that you have stored in your database table employee
 			          }
 				/*for($c=0; $row = mysqli_fetch_row($result); $c++)
 				{
