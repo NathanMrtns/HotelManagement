@@ -95,7 +95,6 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
 ?>
 
 <!-- Display body section with sticky form. -->
->
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
