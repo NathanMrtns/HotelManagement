@@ -20,7 +20,7 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
     $_SESSION[ 'userID' ] = $data[ 'userID' ] ;
     $_SESSION[ 'first_name' ] = $data[ 'first_name' ] ;
     $_SESSION[ 'last_name' ] = $data[ 'last_name' ] ;
-    load ( 'home.php' ) ;
+    load ( 'index.php' ) ;
   }
   # Or on failure set errors.
   else { $errors = $data; }
