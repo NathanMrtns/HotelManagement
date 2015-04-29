@@ -94,7 +94,7 @@ if (isset($_POST['startDate']) && isset($_POST['endDate']) && isset($_POST['capa
 
 	mysqli_close($dbc);
     exit;
-
+    
 }else{
     if(isset($_SESSION['startDate']) && isset($_SESSION['endDate']) && isset($_SESSION['capacity'])) {
         unset($_SESSION['startDate']);

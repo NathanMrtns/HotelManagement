@@ -13,7 +13,7 @@ include('logged_header.php');
 //connect to MySQL (host, user_name, password)
 require('connect_db.php');
 
-if(isset($_SESSION['room_number'])){
+if(isset($_SESSION['room_number']) && isset($_SESSION['startDate']) && isset($_SESSION['endDate'])){
     
     $startDate = strtotime($_SESSION['startDate']);
     $startDateSQL = date('Y-m-d H:i:s', $startDate);
@@ -42,11 +42,30 @@ print '<div class="panel panel-default">';
 			print "<table class='table'>";
 				print "<tr><td>Reservation</td><td>Room</td><td>startDate</td><td>endDate</td></tr>";
 				while($row = mysqli_fetch_array($result2)){
-                                    echo "<tr><td>" . $row['reservationID'] . "</td><td> " . $row['room_number'] . "</td><td> " . $row['start_date'] . "</td><td> " . $row['end_date'] . "</td></tr>";
+                                    echo "<tr><td>" . $row['reservationID'] . "</td><td> " . $row['room_number'] . "</td><td> " . $row['start_date'] . "</td><td> " 
+                                            . $row['end_date'] . "</td><td>" . "<a href='store_reserve.php?delete_room=" . $row['room_number']."'>Delete this reserve</a>" . "</td></tr>";
                                 }
+                        print"</table>";
+	print "</div>";
+print "</div>";
+                                
+# delete reserves
+if(isset($_GET['delete_room'])){
+    $query3 = 'DELETE FROM temp_reserv WHERE userID = '. "'" . $_SESSION['userID'] . "'"
+            . "AND room_number = " . "'" . $_GET['delete_room'] . "'";
+    
+    if(!($result3 = @mysqli_query($dbc, $query3))){
+        print ("Coudnot execute query3! <br />");
+        die(mysql_error());
+    }
+    unset($_GET['delete_room']);
+    @header('Location: store_reserve.php');
+}
 # unset session
 unset($_SESSION['room_number']);
 unset($_SESSION['startDate']);
 unset($_SESSION['endDate']);
 
+mysqli_close($dbc);
+exit;
 ?>

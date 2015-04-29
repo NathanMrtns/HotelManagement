@@ -52,7 +52,7 @@
                                 <a href="store_reserve.php">Reserves</a>
                             </li>
                             <li>
-                                <a href="#">Check Out</a>
+                                <a href="check_out.php">Check Out</a>
                             </li>
                         </ul>
                             <?php echo   
