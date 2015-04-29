@@ -44,15 +44,7 @@
                                         <a href="standard.php">Standard</a>
                                     </li>
                                     <li>
-                                        <a href="family.php">Triple or family</a>
-                                    </li>
-                                    <li class="divider">
-                                    </li>
-                                    <li>
-                                        <a href="master.php">Suite Master</a>
-                                    </li>
-                                    <li>
-                                        <a href="vip.php">Suite VIP</a>
+                                        <a href="family.php">Prime</a>
                                     </li>
                                 </ul>
                             </li>
