@@ -10,32 +10,7 @@ else{
 }
 ?>
 
-<script>
-	$(document).ready(function () {
-   		//$("#endDate").datepicker({
-   		//	disabled: true
-   		//})
-   		var $startDate = $("#startDate");
-   		$startDate.datepicker({
-   			minDate: 0,
-   			onSelect: function(date){
-   				var selectedDate = $("#startDate").datepicker('getDate');
-   				$("#endDate").datepicker('option', "minDate", selectedDate);
-   			}
-   		})
-   		if($("#startDate").datepicker('getDate')==null){
-   			var minDate = 0;
-   		}
-   		$("#endDate").datepicker({
-   			minDate: minDate,
-   			onSelect: function(date){
-   				var selectedEndDate = $("#endDate").datepicker('getDate');
-   				$("#startDate").datepicker('option', "maxDate", selectedEndDate);
-   			}
-   		})
-
-  	});
-</script>
+<script type="text/javascript" src="js/reserve.js"></script>
 
 <body>
 	<form class="form-inline" method="post">
@@ -80,51 +55,46 @@ else{
 	</form>
 
 <?php
-	if (isset($_POST['startDate']) && isset($_POST['endDate']) && isset($_POST['capacity'])) {
+if (isset($_POST['startDate']) && isset($_POST['endDate']) && isset($_POST['capacity'])) {
     $_SESSION['startDate'] = $_POST['startDate'];
     $_SESSION['endDate'] = $_POST['endDate'];
     $_SESSION['capacity'] = $_POST['capacity'];
     $_SESSION['rtype'] = $_POST['rtype'];
+    //convert to compare with database
+    $stDateField = strtotime($_SESSION['startDate']);
+    $stDateFieldSQL = date('Y-m-d H:i:s', $stDateField);
+    $endDateField = strtotime($_SESSION['endDate']);
+    $endDateFieldSQL = date('Y-m-d H:i:s', $endDateField);
 
 	//connect to MySQL (host, user_name, password)
 	require('connect_db.php');
-
-	$query = 'select room_number, capacity, description, room_type, price 
-		      from room 
-	          where capacity = '. "'" . $_SESSION['capacity'] . "'"
-	          . "and room_type = " . "'" . $_SESSION['rtype'] . "'";
+	
+	$query = 'select room.room_number, capacity, description, room_type, price, start_date, end_date
+			from room
+			left join temp_reserv on room.room_number = temp_reserv.room_number
+			where capacity = ' . "'" . $_SESSION['capacity'] . "' and room_type = '" . $_SESSION['rtype'] . "'";
 
 	if(!($result = mysqli_query($dbc, $query)))
 	{
 	    print ("Coudnot execute query! <br/>");
 	    die(mysql_error());
 	}
+
 	print '<div class="panel panel-default">';
     	print '<div class="panel-heading">Search Results</div>';
 			print "<table class='table'>";
 				print "<tr><td>Room Number</td><td>Capacity</td><td>Description</td><td>Type</td><td>Price</td><td>Make reserve</td>";
-				while($row = mysqli_fetch_array($result))
-			          {
-			          echo "<tr><td>" . $row['room_number'] . "</td><td> " . $row['capacity'] . "</td><td> " . $row['description'] . "</td><td> " . $row['room_type'] . "</td><td> $" . $row['price'] . "</td><td> "
-                      . "<a href='store_reserve.php?id=" . $row['room_number']."'>Make your reserve</a>" . "</td></tr>"; //these are the fields that you have stored in your database table employee
-			          }
-				/*for($c=0; $row = mysqli_fetch_row($result); $c++)
-				{
-				    print("<tr>");
-				    foreach($row as $key => $value)
-				    	if(substr($value, -3) == ".00"){
-							print ("<td style=width:200px>$ $value</td>");
-						}else{
-							print ("<td style=width:200px>$value</td>");
-						}	        
-				    print("</tr>");
-				}*/
+				while($row = mysqli_fetch_array($result)){
+					//filter rooms available by dates
+			    	filterByDates($row, $stDateFieldSQL, $endDateFieldSQL);      	
+			    }
 			print"</table>";
 		print "</div>";
 	print "</div>";
 
 	mysqli_close($dbc);
     exit;
+
 }else{
     if(isset($_SESSION['startDate']) && isset($_SESSION['endDate']) && isset($_SESSION['capacity'])) {
         unset($_SESSION['startDate']);
@@ -133,6 +103,22 @@ else{
         print "";
 	}
 }
+
+// function to filter the table by dates
+function filterByDates($row, $stDateFieldSQL, $endDateFieldSQL){
+	if($row['start_date'] == NULL){
+			          		echo "<tr><td>" . $row['room_number'] . "</td><td> " . $row['capacity'] . "</td><td> " . $row['description'] . "</td><td> " . $row['room_type'] . "</td><td> $" . $row['price'] . "</td><td> "
+                      . "<a href='store_reserve.php?id=" . $row['room_number']."'>Make your reserve</a>" . "</td></tr>";
+	}else{
+		if((($row['start_date'] > $stDateFieldSQL) && ($row['start_date'] > $endDateFieldSQL)) || (($row['end_date'] < $stDateFieldSQL) && ($row['end_date'] < $endDateFieldSQL))){
+	   			echo "<tr><td>" . $row['room_number'] . "</td><td> " . $row['capacity'] . "</td><td> " . $row['description'] . "</td><td> " . $row['room_type'] . "</td><td> $" . $row['price'] . "</td><td> "
+                      . "<a href='store_reserve.php?id=" . $row['room_number']."'>Make your reserve</a>" . "</td></tr>";
+		}
+
+	}
+}
+
+
 ?>
 </body>
 
