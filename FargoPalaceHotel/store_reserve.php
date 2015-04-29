@@ -42,8 +42,22 @@ print '<div class="panel panel-default">';
 			print "<table class='table'>";
 				print "<tr><td>Reservation</td><td>Room</td><td>startDate</td><td>endDate</td></tr>";
 				while($row = mysqli_fetch_array($result2)){
-                                    echo "<tr><td>" . $row['reservationID'] . "</td><td> " . $row['room_number'] . "</td><td> " . $row['start_date'] . "</td><td> " . $row['end_date'] . "</td></tr>";
+                                    echo "<tr><td>" . $row['reservationID'] . "</td><td> " . $row['room_number'] . "</td><td> " . $row['start_date'] . "</td><td> " 
+                                            . $row['end_date'] . "</td><td>" . "<a href='store_reserve.php?delete_room=" . $row['room_number']."'>Delete this reserve</a>" . "</td></tr>";
                                 }
+                                
+# delete reserves
+if(isset($_GET['delete_room'])){
+    $query3 = 'DELETE FROM temp_reserv WHERE userID = '. "'" . $_SESSION['userID'] . "'"
+            . "AND room_number = " . "'" . $_GET['delete_room'] . "'";
+    
+    if(!($result3 = @mysqli_query($dbc, $query3))){
+        print ("Coudnot execute query1! <br />");
+        die(mysql_error());
+    }
+    unset($_GET['delete_room']);
+    header('Location: store_reserve.php');
+}
 # unset session
 unset($_SESSION['room_number']);
 unset($_SESSION['startDate']);
