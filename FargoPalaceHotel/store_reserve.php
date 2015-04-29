@@ -21,7 +21,7 @@ if(isset($_SESSION['room_number'])){
     $endDateSQL = date('Y-m-d H:i:s', $endDate);
 
     # insert a new reserve by the current user.
-    $query1 = 'INSERT INTO reservation(room_number, userID, start_date, end_date) VALUES(' ."'". $_SESSION['room_number'] . "'" . ","
+    $query1 = 'INSERT INTO temp_reserv(room_number, userID, start_date, end_date) VALUES(' ."'". $_SESSION['room_number'] . "'" . ","
     . "'". $_SESSION['userID'] . "'" . "," ."'". $startDateSQL . "'" . "," . "'". $endDateSQL. "'" . ")";
 
    if(!($result1 = @mysqli_query($dbc, $query1))){
@@ -30,7 +30,7 @@ if(isset($_SESSION['room_number'])){
     }
 }
 
-$query2 = 'SELECT reservationID, room_number, start_date, end_date FROM reservation WHERE userID = '. "'" . $_SESSION['userID'] . "'";
+$query2 = 'SELECT reservationID, room_number, start_date, end_date FROM temp_reserv WHERE userID = '. "'" . $_SESSION['userID'] . "'";
          
 if(!($result2 = @mysqli_query($dbc, $query2))){
     print ("Coudnot execute query2! <br />");

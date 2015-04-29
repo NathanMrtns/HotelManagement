@@ -22,6 +22,19 @@ CREATE TABLE IF NOT EXISTS room (
     PRIMARY KEY (room_number)
 );
 
+CREATE TABLE IF NOT EXISTS temp_reserv (
+    reservationID INT AUTO_INCREMENT,
+    room_number INT,
+    userID INT,
+    start_date DATE,
+    end_date DATE,
+    PRIMARY KEY (reservationID),
+    FOREIGN KEY (room_number)
+        REFERENCES room (room_number),
+    FOREIGN KEY (userID)
+        REFERENCES user_table (userID)
+);
+
 CREATE TABLE IF NOT EXISTS reservation (
     reservationID INT AUTO_INCREMENT,
     room_number INT,
@@ -112,7 +125,3 @@ insert into room
 values (704,3,129.00,"Prime room with 1 king size bed and 1 single bed, tv, and bathtub.","Prime");
 insert into room
 values (705,4,149.00,"Prime room with 2 king size beds, tv and bathtub.","Prime");
-
-
-
-
