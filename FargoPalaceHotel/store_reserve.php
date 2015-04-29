@@ -1,33 +1,49 @@
 <?php
 session_start();
-# Redirect if not logged in.
-if ( !isset( $_SESSION[ 'userID' ] ) ) { require ( 'login_tools.php' ) ; load() ; }
 
-include('logged_header.php');
-
-
-# Get passed product id and assign it ot a variable.
 if(isset($_GET['id'])){
     $_SESSION['room_number'] = $_GET['id'];
 }
 
 
+# Redirect if not logged in.
+if ( !isset( $_SESSION[ 'userID' ] ) ) { require ( 'login_tools.php' ) ; load() ; }
+
+include('logged_header.php');
+
 //connect to MySQL (host, user_name, password)
 require('connect_db.php');
 
-$query = 'SELECT room_number, capacity, description, room_type, price
-         FROM room WHERE room_number = '. "'" . $_SESSION['room_number'] . "'";
+if(isset($_SESSION['room_number'])){
+
+    # insert a new reserve by the current user.
+    $query1 = 'INSERT INTO reservation(room_number, userID, start_date, end_date) VALUES(' ."'". $_SESSION['room_number'] . "'" . ","
+    . "'". $_SESSION['userID'] . "'" . "," ."'". $_SESSION['startDate'] . "'" . "," . "'". $_SESSION['endDate'] . "'" . ")";
+
+   if(!($result1 = @mysqli_query($dbc, $query1))){
+        print ("Coudnot execute query1! <br />");
+        die(mysql_error());
+    }
+}
+
+$query2 = 'SELECT reservationID, room_number, start_date, end_date FROM reservation WHERE userID = '. "'" . $_SESSION['userID'] . "'";
          
-if(!($result = mysqli_query($dbc, $query))){
-    print ("Coudnot execute query! <br />");
+if(!($result2 = @mysqli_query($dbc, $query2))){
+    print ("Coudnot execute query2! <br />");
     die(mysql_error());
 }
 
 print '<div class="panel panel-default">';
     	print '<div class="panel-heading">Reserves</div>';
 			print "<table class='table'>";
-				print "<tr><td>Room Number</td><td>Capacity</td><td>Description</td><td>Type</td><td>Price</td>";
-				$row = mysqli_fetch_array($result);
-                echo "<tr><td>" . $row['room_number'] . "</td><td> " . $row['capacity'] . "</td><td> " . $row['description'] . "</td><td> " . $row['room_type'] . "</td><td> $" . $row['price'] . "</td><td> ";
+				print "<tr><td>Reservation</td><td>Room</td><td>startDate</td><td>endDate</td></tr>";
+				$row = mysqli_fetch_array($result2);
+                echo "<tr><td>" . $row['reservationID'] . "</td><td> " . $row['room_number'] . "</td><td> " . $row['start_date'] . "</td><td> " . $row['end_date'] . "</td></tr>";
+
+
+# unset session
+unset($_SESSION['room_number']);
+unset($_SESSION['startDate']);
+unset($_SESSION['endDate']);
 
 ?>

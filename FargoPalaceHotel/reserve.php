@@ -103,7 +103,7 @@ else{
 	print '<div class="panel panel-default">';
     	print '<div class="panel-heading">Search Results</div>';
 			print "<table class='table'>";
-				print "<tr><td>Room Number</td><td>Capacity</td><td>Description</td><td>Type</td><td>Price</td>";
+				print "<tr><td>Room Number</td><td>Capacity</td><td>Description</td><td>Type</td><td>Price</td><td>Make reserve</td>";
 				while($row = mysqli_fetch_array($result))
 			          {
 			          echo "<tr><td>" . $row['room_number'] . "</td><td> " . $row['capacity'] . "</td><td> " . $row['description'] . "</td><td> " . $row['room_type'] . "</td><td> $" . $row['price'] . "</td><td> "
