@@ -93,7 +93,6 @@ if (isset($_POST['startDate']) && isset($_POST['endDate']) && isset($_POST['capa
 	print "</div>";
 
 	mysqli_close($dbc);
-	
     exit;
 
 }else{
