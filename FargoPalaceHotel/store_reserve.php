@@ -55,11 +55,11 @@ if(isset($_GET['delete_room'])){
             . "AND room_number = " . "'" . $_GET['delete_room'] . "'";
     
     if(!($result3 = @mysqli_query($dbc, $query3))){
-        print ("Coudnot execute query1! <br />");
+        print ("Coudnot execute query3! <br />");
         die(mysql_error());
     }
     unset($_GET['delete_room']);
-    header('Location: store_reserve.php');
+    @header('Location: store_reserve.php');
 }
 # unset session
 unset($_SESSION['room_number']);
