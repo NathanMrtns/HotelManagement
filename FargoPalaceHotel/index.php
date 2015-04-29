@@ -1,8 +1,13 @@
 
 <?php # HOME PAGE.
-
+ session_start();
 # display header section.
-include ( 'header.html' ) ;
+if ( !isset( $_SESSION[ 'userID' ] ) ){
+    include('header.html');
+}
+else{
+    include('logged_header.php');
+}
 
 echo '<div class="carousel slide" id="carousel-275680">
     <ol class="carousel-indicators">

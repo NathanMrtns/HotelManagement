@@ -1,8 +1,13 @@
 
 <?php
 session_start();
-include('header.html');
 
+if ( !isset( $_SESSION[ 'userID' ] ) ){
+    include('header.html');
+}
+else{
+    include('logged_header.php');
+}
 ?>
 
 <script>

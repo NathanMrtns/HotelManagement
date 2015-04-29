@@ -1,8 +1,13 @@
 <?php # FAMILY OR TRIPLE ROOM PAGE.
 
+ session_start();
 # display header section.
-include ( 'header.html' ) ;
-
+if ( !isset( $_SESSION[ 'userID' ] ) ){
+    include('header.html');
+}
+else{
+    include('logged_header.php');
+}
 echo '<div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
