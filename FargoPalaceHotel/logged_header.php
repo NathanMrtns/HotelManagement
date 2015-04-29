@@ -11,7 +11,7 @@
     <!--script src="js/less-1.3.3.min.js"></script-->
     <!--append ‘#!watch’ to the browser URL, then refresh the page. -->
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/jquery-ui.css">
 
@@ -62,16 +62,22 @@
                             <li>
                                 <a href="#">Check Out</a>
                             </li>
-
-               <?php echo   "<form class='navbar-form navbar-right' action='log_out.php' method='post' role='login' >
-                                <div class='form-group'>
-                                    <label><span style='color:#FFFFFF'>" . $_SESSION['first_name']. " " . $_SESSION['last_name'] . "</span></label>
-                                </div>
-                                <button type='submit' class='btn btn-default'>Log Out</button>
-                            </form>
                         </ul>
+                            <?php echo   
+                                "<form class='navbar-form navbar-right' action='log_out.php' method='post'>
+                                    <div class='form-group'>
+                                        <li>
+                                            <b><span style='color:#FFFFFF'>" . $_SESSION['first_name']. " " . $_SESSION['last_name'] . "</span></b>
+                                        </li>
+                                    </div>
+                                    <div class='form-group'>
+                                        <li>
+                                            <button type='submit' class='btn btn-link'>Log Out</button>
+                                        </li>
+                                    </div>
+                                </form>";?>
                     </div>
-                </nav>" ; ?>
+                </nav>
 
 
 

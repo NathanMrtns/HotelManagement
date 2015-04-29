@@ -110,7 +110,7 @@ else{
         unset($_SESSION['startDate']);
         unset($_SESSION['endDate']);
         unset($_SESSION['capacity']);
-        print "" ;
+        print "";
 	}
 }
 ?>
