@@ -83,7 +83,6 @@ if (isset($_POST['startDate']) && isset($_POST['endDate']) && isset($_POST['capa
 	print '<div class="panel panel-default">';
     	print '<div class="panel-heading">Search Results</div>';
 			print "<table class='table'>";
-				print "<tr><td>Room Number</td><td>Capacity</td><td>Description</td><td>Type</td><td>Price</td><td>Make reserve</td>";
 				while($row = mysqli_fetch_array($result)){
 					//filter rooms available by dates
 			    	filterByDates($row, $stDateFieldSQL, $endDateFieldSQL);      	
@@ -106,18 +105,157 @@ if (isset($_POST['startDate']) && isset($_POST['endDate']) && isset($_POST['capa
 
 // function to filter the table by dates
 function filterByDates($row, $stDateFieldSQL, $endDateFieldSQL){
+    
+        $img = filterImage($row['capacity'], $row['room_type'], $row['room_number']);
+        
 	if($row['start_date'] == NULL){
-			          		echo "<tr><td>" . $row['room_number'] . "</td><td> " . $row['capacity'] . "</td><td> " . $row['description'] . "</td><td> " . $row['room_type'] . "</td><td> $" . $row['price'] . "</td><td> "
-                      . "<a href='store_reserve.php?id=" . $row['room_number']."'>Make your reserve</a>" . "</td></tr>";
+            
+            echo '<tr><td rowspan="7"><img src="' . $img . '" class="img-rounded" width="350" height="250"/></td></tr>'
+                 . '<tr><td colspan="6">ROOM: ' . $row['room_number'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
+                 . '<tr><td colspan="6">CAPACITY: ' . $row['capacity'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
+                 . '<tr><td colspan="6">DESCRIPTION: ' . $row['description'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
+                 . '<tr><td colspan="6">TYPE: ' . $row['room_type'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
+                 . '<tr><td colspan="6">PRICE: ' . $row['price'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
+                 . '<tr><td colspan="6"><a href="store_reserve.php?id=' . $row['room_number']. '">Make your reserve</a></td><td></td><td></td><td></td><td></td><td></td></tr>';
+		     
 	}else{
 		if((($row['start_date'] > $stDateFieldSQL) && ($row['start_date'] > $endDateFieldSQL)) || (($row['end_date'] < $stDateFieldSQL) && ($row['end_date'] < $endDateFieldSQL))){
-	   			echo "<tr><td>" . $row['room_number'] . "</td><td> " . $row['capacity'] . "</td><td> " . $row['description'] . "</td><td> " . $row['room_type'] . "</td><td> $" . $row['price'] . "</td><td> "
-                      . "<a href='store_reserve.php?id=" . $row['room_number']."'>Make your reserve</a>" . "</td></tr>";
+                    
+                echo '<tr><td rowspan="7"><img src=' . $img . 'class="img-rounded" width="350" height="250"/></td></tr>'
+                    . '<tr><td colspan="6">ROOM: ' . $row['room_number'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
+                    . '<tr><td colspan="6">CAPACITY: ' . $row['capacity'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
+                    . '<tr><td colspan="6">DESCRIPTION: ' . $row['description'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
+                    . '<tr><td colspan="6">TYPE: ' . $row['room_type'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
+                    . '<tr><td colspan="6">PRICE: ' . $row['price'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
+                    . '<tr><td colspan="6"><a href="store_reserve.php?id=' . $row['room_number']. '">Make your reserve</a></td><td></td><td></td><td></td><td></td><td></td></tr>';
+                    
+	   		
 		}
 
 	}
 }
 
+# function to filter room pictures
+function filterImage($capacity, $room_type, $room_number){
+
+    if($room_type == 'Standard'){
+        
+        switch($capacity){
+            
+            case 1:
+                if($room_number > 100 and $room_number < 300){
+                    $img = 'img/rooms/standard_room1_1.jpg';
+                }
+                elseif($room_number > 300 and $room_number < 600){
+                    $img = 'img/rooms/standard_room1_2.jpg';
+                }
+                else{
+                    $img = 'img/rooms/standard_room1_3.jpg';
+                }
+            
+                return $img;
+            
+            case 2:
+                if($room_number > 100 and $room_number < 300){
+                    $img = 'img/rooms/standard_room2_1.jpg';
+                }
+                elseif($room_number > 300 and $room_number < 600){
+                    $img = 'img/rooms/standard_room2_2.jpg';
+                }
+                else{
+                    $img = 'img/rooms/standard_room2_3.jpg';
+                }
+            
+                return $img;
+                
+            case 3:
+                if($room_number > 100 and $room_number < 300){
+                    $img = 'img/rooms/standard_room3_1.jpg';
+                }
+                elseif($room_number > 300 and $room_number < 600){
+                    $img = 'img/rooms/standard_room3_2.jpg';
+                }
+                else{
+                    $img = 'img/rooms/standard_room3_3.jpg';
+                }
+            
+                return $img;
+            
+            case 4:
+                if($room_number > 100 and $room_number < 300){
+                    $img = 'img/rooms/standard_room4_1.jpg';
+                }
+                elseif($room_number > 300 and $room_number < 600){
+                    $img = 'img/rooms/standard_room4_2.jpg';
+                }
+                else{
+                    $img = 'img/rooms/standard_room4_3.jpg';
+                }
+            
+                return $img;;
+                
+        }
+    }
+    else{
+        switch($capacity){
+            
+            case 1:
+                if($room_number > 100 and $room_number < 300){
+                    $img = 'img/rooms/prime_room1_1.jpg';
+                }
+                elseif($room_number > 300 and $room_number < 600){
+                    $img = 'img/rooms/prime_room1_2.jpg';
+                }
+                else{
+                    $img = 'img/rooms/prime_room1_3.jpg';
+                }
+            
+                return $img;
+                
+            case 2:
+                if($room_number > 100 and $room_number < 300){
+                    $img = 'img/rooms/prime_room2_1.jpg';
+                }
+                elseif($room_number > 300 and $room_number < 600){
+                    $img = 'img/rooms/prime_room2_2.jpg';
+                }
+                else{
+                    $img = 'img/rooms/prime_room2_3.jpg';
+                }
+            
+                return $img;
+            
+            case 3:
+                if($room_number > 100 and $room_number < 300){
+                    $img = 'img/rooms/prime_room3_1.jpg';
+                }
+                elseif($room_number > 300 and $room_number < 600){
+                    $img = 'img/rooms/prime_room3_2.jpg';
+                }
+                else{
+                    $img = 'img/rooms/prime_room3_3.jpg';
+                }
+            
+                return $img;
+            
+            case 4:
+                if($room_number > 100 and $room_number < 300){
+                    $img = 'img/rooms/prime_room4_1.jpg';
+                }
+                elseif($room_number > 300 and $room_number < 600){
+                    $img = 'img/rooms/prime_room4_2.jpg';
+                }
+                else{
+                    $img = 'img/rooms/prime_room4_3.jpg';
+                }
+            
+                return $img;
+                
+        }
+    }
+    
+    
+}
 
 ?>
 </body>
