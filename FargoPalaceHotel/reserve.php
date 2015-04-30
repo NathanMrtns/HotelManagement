@@ -115,7 +115,7 @@ function filterByDates($row, $stDateFieldSQL, $endDateFieldSQL){
                  . '<tr><td colspan="6">CAPACITY: ' . $row['capacity'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
                  . '<tr><td colspan="6">DESCRIPTION: ' . $row['description'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
                  . '<tr><td colspan="6">TYPE: ' . $row['room_type'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
-                 . '<tr><td colspan="6">PRICE: ' . $row['price'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
+                 . '<tr><td colspan="6">PRICE: $' . $row['price'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
                  . '<tr><td colspan="6"><a href="store_reserve.php?id=' . $row['room_number']. '">Make your reserve</a></td><td></td><td></td><td></td><td></td><td></td></tr>';
 		     
 	}else{
@@ -126,7 +126,7 @@ function filterByDates($row, $stDateFieldSQL, $endDateFieldSQL){
                     . '<tr><td colspan="6">CAPACITY: ' . $row['capacity'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
                     . '<tr><td colspan="6">DESCRIPTION: ' . $row['description'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
                     . '<tr><td colspan="6">TYPE: ' . $row['room_type'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
-                    . '<tr><td colspan="6">PRICE: ' . $row['price'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
+                    . '<tr><td colspan="6">PRICE: $' . $row['price'] . '</td><td></td><td></td><td></td><td></td><td></td></tr>'
                     . '<tr><td colspan="6"><a href="store_reserve.php?id=' . $row['room_number']. '">Make your reserve</a></td><td></td><td></td><td></td><td></td><td></td></tr>';
                     
 	   		
