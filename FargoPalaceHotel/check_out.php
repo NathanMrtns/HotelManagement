@@ -28,7 +28,9 @@ if(!($result1 = @mysqli_query($dbc, $query1))){
 			          print "<tr><td></td><td></td><td></td><td></td>";
 				  printf ("<td>Total(SubTotal + Tax) : $%0.2f</td></tr>", $total);
                                   print "<tr><td></td><td></td><td></td><td></td>";
-                                  print "<td><button type='button' class='btn btn-success' data-toggle='modal' data-target='#myModal'>Confirm</button></td></tr>";
+                                  if ($total != 0){
+                                                                      print "<td><button type='button' class='btn btn-success' data-toggle='modal' data-target='#myModal'>Confirm</button></td></tr>";
+                                  }
 				
 			
         
