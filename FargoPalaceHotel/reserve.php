@@ -71,7 +71,7 @@ if (isset($_POST['startDate']) && isset($_POST['endDate']) && isset($_POST['capa
 	
 	$query = 'select room.room_number, capacity, description, room_type, price, start_date, end_date
 			from room
-			left join temp_reserv on room.room_number = temp_reserv.room_number
+			left join reservation on room.room_number = reservation.room_number
 			where capacity = ' . "'" . $_SESSION['capacity'] . "' and room_type = '" . $_SESSION['rtype'] . "'";
 
 	if(!($result = mysqli_query($dbc, $query)))
