@@ -31,7 +31,7 @@ echo '<div class="carousel slide" id="carousel-275680">
 	</div>
     </div>
     <div class="item">
-	<img alt="" src="img/ndsu.jpg">
+	<img alt="" src="img/fargodome.jpg">
 	<div class="carousel-caption">
 	    <h4>
 		Good attractions
@@ -42,13 +42,13 @@ echo '<div class="carousel slide" id="carousel-275680">
 	</div>
     </div>
     <div class="item">
-	<img alt="" src="img/suite-master.jpg">
+	<img alt="" src="img/prime_room_2.jpg" >
 	<div class="carousel-caption">
 	    <h4>
-		Suite Master
+		Prime Rooms
 	    </h4>
 	    <p>
-		Experiment this deluxe room.
+		Experiment these confortable places.
 	    </p>
 	</div>
     </div>
@@ -60,9 +60,6 @@ echo '<div class="carousel slide" id="carousel-275680">
 	</h1>
 	<p>
             Our hotel Euro-style hotel rooms and on-site amenities, including a well-equipped fitness center, free Wi-Fi, complimentary airport shuttle service, a business center and three excellent dining outlets, ensure you a memorable stay.
-	</p>
-	<p>
-	    <a class="btn btn-primary btn-large" href="#">More about us</a>
 	</p>
     </div>
 </div>

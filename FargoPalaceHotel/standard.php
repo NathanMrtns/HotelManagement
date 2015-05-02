@@ -21,9 +21,7 @@ echo '<div class="container">
                         It comes as a single, which is one king-size bed, or as a double, with two queen beds.
                         The standard room has the basic amenities, as a television, coffee maker, telephone, desk, closet and private bathroom.
 				</p>
-				<p>
-					<a class="btn btn-primary btn-large" href="#">Availability</a>
-				</p>
+				
 			</div>
 		</div>
 	</div>

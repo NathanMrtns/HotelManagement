@@ -30,9 +30,7 @@ if(!($result1 = @mysqli_query($dbc, $query1))){
                                   print "<tr><td></td><td></td><td></td><td></td>";
                                   print "<td><button type='button' class='btn btn-success' data-toggle='modal' data-target='#myModal'>Confirm</button></td></tr>";
 				
-			print"</table>";
-		print "</div>";
-	print "</div>";
+			
         
 print'<div id="myModal" class="modal fade" role="dialog">
          <div class="modal-dialog">
@@ -84,6 +82,9 @@ if(isset($_GET['trigger'])){
     }
     $row4 = mysqli_fetch_array($result4);
     
+    print "<tr><td></td><td></td><td></td><td></td>";
+    print "<td><button type='button' class='btn btn-info' onclick='printFunc()' >Print</button></td></tr>";
+    
     // SEND EMAIL TO CUSTOMER 
     $to = $row4['email'];
     $subject = "Reservation receipt";
@@ -92,15 +93,25 @@ if(isset($_GET['trigger'])){
     $from = "fargopalace@hotel.com";
     $headers = "From:" . $from;
 
-    error_log(mail($to, $subject, $message, $headers));
-    mail($to, $subject, $message, $headers);
+    error_log(@mail($to, $subject, $message, $headers));
+    @mail($to, $subject, $message, $headers);
     
     unset($_GET['trigger']);
     
 }
- 
 
-@header('Location: index.php');
+                    print"</table>";
+		print "</div>";
+	print "</div>";
+        
+# Function responsible to print.
+print '<script>
+          function printFunc() {
+              window.print();
+          }
+       </script>'  ;     
+
+
 mysqli_close($dbc);
 exit;
 ?>

@@ -44,7 +44,7 @@
                                         <a href="standard.php">Standard</a>
                                     </li>
                                     <li>
-                                        <a href="family.php">Prime</a>
+                                        <a href="prime.php">Prime</a>
                                     </li>
                                 </ul>
                             </li>
