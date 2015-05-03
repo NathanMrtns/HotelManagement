@@ -16,24 +16,21 @@ if(!($result1 = @mysqli_query($dbc, $query1))){
 				print "<tr><td>Room Number</td><td>Capacity</td><td>Description</td><td>Type</td><td>Price</td>";
 				while($row1 = mysqli_fetch_array($result1))
 			          {
-			          echo "<tr><td>" . $row1['room_number'] . "</td><td> " . $row1['capacity'] . "</td><td> " . $row1['description'] . "</td><td> " 
+			          echo "<tr><td>" . $row1['room_number'] . "</td><td> " . $row1['capacity'] . "</td><td> " . $row1['description'] . "</td><td> "
                                           . $row1['room_type'] . "</td><td> $" . $row1['price'] . "</td></tr> ";
                                   $subTotal += $row1['price'];
 
 			          }
                                   $total = $subTotal * 1.06;
-			          
+
                                   print"<tr><td>" . "<strong>" . $_SESSION['first_name'] . "'s bill" . "</strong>" . "</td><td></td><td></td><td></td>";
                                   printf ("<td>SubTotal : $%0.2f</td></tr>", $subTotal);
 			          print "<tr><td></td><td></td><td></td><td></td>";
 				  printf ("<td>Total(SubTotal + Tax) : $%0.2f</td></tr>", $total);
-                                  print "<tr><td></td><td></td><td></td><td></td>";
-                                  if ($total != 0){
-                                                                      print "<td><button type='button' class='btn btn-success' data-toggle='modal' data-target='#myModal'>Confirm</button></td></tr>";
-                                  }
-				
-			
-        
+
+
+
+
 print'<div id="myModal" class="modal fade" role="dialog">
          <div class="modal-dialog">
 
@@ -54,6 +51,8 @@ print'<div id="myModal" class="modal fade" role="dialog">
       </div>';
 
 if(isset($_GET['trigger'])){
+
+    print '<script>location.reload(check_out.php);</script>';
     $query2 = 'SELECT room_number, start_date, end_date FROM temp_reserv WHERE userID ='. "'" . $_SESSION['userID'] . "'";
     if(!($result2 = @mysqli_query($dbc, $query2))){
         print ("Coudnot execute query2! <br />");
@@ -62,32 +61,36 @@ if(isset($_GET['trigger'])){
     while($row2 = mysqli_fetch_array($result2)){
         $query_aux = 'INSERT INTO reservation(room_number, userID, start_date, end_date) VALUES(' ."'". $row2['room_number'] . "'" . ","
         . "'". $_SESSION['userID'] . "'" . "," ."'". $row2['start_date'] . "'" . "," . "'". $row2['end_date']. "'" . ")";
-     
+
         if(!($result_aux = @mysqli_query($dbc, $query_aux))){
             print ("Coudnot execute this current query! <br />");
             die(mysql_error());
         }
+
         $query_aux ="";
         $result_aux="";
 
     }
+
+    print "<tr><td></td><td></td><td></td><td></td>";
+    print "<td><button type='button' class='btn btn-info' onclick='printFunc()' >Print</button></td></tr>";
+
+
     $query3 = 'DELETE FROM temp_reserv WHERE userID='. "'" . $_SESSION['userID'] . "'";
     if(!($result3 = @mysqli_query($dbc, $query3))){
         print ("Coudnot execute query3! <br />");
         die(mysql_error());
     }
-    
+
     $query4 = 'SELECT first_name, last_name, email FROM user_table WHERE userID='. "'" . $_SESSION['userID'] . "'";
     if(!($result4 = @mysqli_query($dbc, $query4))){
         print ("Coudnot execute query3! <br />");
         die(mysql_error());
     }
     $row4 = mysqli_fetch_array($result4);
-    
-    print "<tr><td></td><td></td><td></td><td></td>";
-    print "<td><button type='button' class='btn btn-info' onclick='printFunc()' >Print</button></td></tr>";
-    
-    // SEND EMAIL TO CUSTOMER 
+
+
+    // SEND EMAIL TO CUSTOMER
     $to = $row4['email'];
     $subject = "Reservation receipt";
     $message = "Dear" . " " . $_SESSION['first_name'] . " " . $_SESSION['last_name']
@@ -97,21 +100,26 @@ if(isset($_GET['trigger'])){
 
     error_log(@mail($to, $subject, $message, $headers));
     @mail($to, $subject, $message, $headers);
-    
-    unset($_GET['trigger']);
-    
-}
 
+    unset($_GET['trigger']);
+
+}
+else{
+    if ($total != 0){
+        print "<tr><td></td><td></td><td></td><td></td>";
+        print "<td><button type='button' class='btn btn-success' data-toggle='modal' data-target='#myModal'>Confirm</button></td></tr>";
+    }
+}
                     print"</table>";
 		print "</div>";
 	print "</div>";
-        
+
 # Function responsible to print.
 print '<script>
           function printFunc() {
               window.print();
           }
-       </script>'  ;     
+       </script>'  ;
 
 
 mysqli_close($dbc);
