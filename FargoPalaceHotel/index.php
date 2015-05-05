@@ -59,7 +59,7 @@ echo '<div class="carousel slide" id="carousel-275680">
 	    Welcome to the Fargo Palace Hotel!
 	</h1>
 	<p>
-            Our hotel Euro-style hotel rooms and on-site amenities, including a well-equipped fitness center, free Wi-Fi, complimentary airport shuttle service, a business center and three excellent dining outlets, ensure you a memorable stay.
+            Our Euro-style hotel rooms and on-site amenities, including a well-equipped fitness center, free Wi-Fi, complimentary airport shuttle service, a business center and three excellent dining outlets, ensure you a memorable stay.
 	</p>
     </div>
 </div>
