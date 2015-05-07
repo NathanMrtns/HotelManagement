@@ -9,7 +9,12 @@ else{
     include('logged_header.php');
 }
 ?>
-
+<style type="text/css">
+#startDate, #endDate {
+      background-color: white;
+      cursor: pointer;
+}
+</style>
 <script type="text/javascript" src="js/reserve.js"></script>
 
 <body>
@@ -22,10 +27,10 @@ else{
         <br />
 		<div class="input-group input-group-sm">
 		    <div class="col-xs-3">
-	    		<span>Start Date: <input class="form-control" type="text" name="startDate" id="startDate" required><span>
+	    		<span>Start Date: <input class="form-control" type="text" name="startDate" id="startDate" readonly="true" required><span>
 	    	</div>
 	    	<div class="col-xs-3">
-				<span>End Date: <input class="form-control" type="text" name="endDate" id="endDate" required></span>
+				<span>End Date: <input class="form-control" type="text" name="endDate" id="endDate"  readonly="true" required></span>
 			</div>
 			<div class="col-xs-2">
 				<p>Room Capacity: 
