@@ -1,3 +1,0 @@
-Project members
-Renato
-Nathan
